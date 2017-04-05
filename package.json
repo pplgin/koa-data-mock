@@ -1,0 +1,33 @@
+{
+  "name": "koa-data-mock",
+  "version": "0.0.1",
+  "description": "基于koa2 数据mock",
+  "main": "app.js",
+  "scripts": {
+    "db": "mongod --dbpath=./data/db",
+    "dev": "nodemon app.js",
+    "debug": "node --inspect app.js"
+  },
+  "keywords": [
+    "koa",
+    "react"
+  ],
+  "author": "johnnyjiang",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "koa": "^2.2.0",
+    "koa-bodyparser": "^4.2.0",
+    "koa-static": "^3.0.0",
+    "mongoose": "^4.9.2",
+    "request": "^2.81.0"
+  },
+  "devDependencies": {
+    "co": "^4.6.0",
+    "koa-router": "^7.0.1",
+    "koa-swig": "^2.2.1",
+    "nodemon": "^1.11.0",
+    "swig": "^1.4.2",
+    "webpack": "^2.2.1"
+  }
+}
