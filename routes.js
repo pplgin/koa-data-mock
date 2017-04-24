@@ -16,8 +16,8 @@ module.exports = [{
   method: 'get'
 }, {
   url: '/mock/:id/',
-  controller: 'index::getMockById',
-  method: 'post'
+  controller: 'index::deleteMockById',
+  method: 'delete'
 }, {
   url: '/mockedit/:id/',
   controller: 'index',
@@ -26,12 +26,8 @@ module.exports = [{
   url: '/mocklist',
   controller: 'mocklist',
   template: 'mocklist'
-}, {
-  url: '/api/login',
-  controller: 'user::PostLogin',
-  method: 'post'
-}, {
-  url: '/api/reg',
-  controller: 'user::PostReg',
-  method: 'post'
+},{
+  url: '/help',
+  controller: 'index::help',
+  template: 'help'
 }];

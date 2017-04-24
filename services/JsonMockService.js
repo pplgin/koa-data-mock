@@ -8,8 +8,7 @@ const templateReg = /^(\{\{)(\w*)(\}\})$/i;
  * @createTime  2017-03-29T15:55:39+0800
  */
 function JsonMockService(obj) {
-  let newdata = generateFromTemplate(obj);
-  return newdata;
+  return generateFromTemplate(obj);
 }
 
 
@@ -102,7 +101,7 @@ function generateFromTemplate(template, name) {
     case 'array':
       generated = [];
       for (var i = 0; i < (length || template.length); i++) {
-        generated[i] = generateFromTemplate( length ? template[0] : template[i]);
+        generated[i] = generateFromTemplate(length ? template[0] : template[i]);
       }
       break;
 
@@ -171,28 +170,25 @@ function generateFromTemplate(template, name) {
 function getRandomData(key) {
   key = key.substr(1); // remove "@"
 
-  //var params = key.match(/\(((\d+),?)+\)/g) || [];
-  var params = key.match(/\(([^\)]+)\)/g) || [];
-
   if (!(key in STATIC_DATA)) {
     return key;
   }
 
-  var a = STATIC_DATA[key];
+  let sData = STATIC_DATA[key];
 
-  switch (type(a)) {
+  switch (type(sData)) {
     case 'array':
-      var index = Math.floor(a.length * Math.random());
-      return a[index];
+      var index = Math.floor(sData.length * Math.random());
+      return sData[index];
 
     case 'function':
-      return a();
+      return sData();
   }
 }
 
 
 function randomDate() {
-  return new Date(Math.floor(Math.random() * new Date().valueOf()));
+  return new Date(Math.floor(Math.random() * new Date()));
 }
 
 
@@ -205,44 +201,57 @@ const STATIC_DATA = {
   NUMBER: "0123456789".split(''),
   LETTER_UPPER: "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(''),
   LETTER_LOWER: "abcdefghijklmnopqrstuvwxyz".split(''),
-  MALE_FIRST_NAME: ["James", "John", "Robert", "Michael", "William", "David",
+  E_FIRST: ["James", "John", "Robert", "Michael", "William", "David",
     "Richard", "Charles", "Joseph", "Thomas", "Christopher", "Daniel",
     "Paul", "Mark", "Donald", "George", "Kenneth", "Steven", "Edward",
     "Brian", "Ronald", "Anthony", "Kevin", "Jason", "Matthew", "Gary",
-    "Timothy", "Jose", "Larry", "Jeffrey", "Frank", "Scott", "Eric"
-  ],
-  FEMALE_FIRST_NAME: ["Mary", "Patricia", "Linda", "Barbara", "Elizabeth",
-    "Jennifer", "Maria", "Susan", "Margaret", "Dorothy", "Lisa", "Nancy",
+    "Timothy", "Jose", "Larry", "Jeffrey", "Frank", "Scott", "Eric",
+    "Mary", "Patricia", "Linda", "Barbara", "Elizabeth", "Jennifer",
+    "Maria", "Susan", "Margaret", "Dorothy", "Lisa", "Nancy",
     "Karen", "Betty", "Helen", "Sandra", "Donna", "Carol", "Ruth", "Sharon",
     "Michelle", "Laura", "Sarah", "Kimberly", "Deborah", "Jessica",
     "Shirley", "Cynthia", "Angela", "Melissa", "Brenda", "Amy", "Anna"
   ],
-  LAST_NAME: ["Smith", "Johnson", "Williams", "Brown", "Jones", "Miller",
+  E_LAST: ["Smith", "Johnson", "Williams", "Brown", "Jones", "Miller",
     "Davis", "Garcia", "Rodriguez", "Wilson", "Martinez", "Anderson",
     "Taylor", "Thomas", "Hernandez", "Moore", "Martin", "Jackson",
     "Thompson", "White", "Lopez", "Lee", "Gonzalez", "Harris", "Clark",
     "Lewis", "Robinson", "Walker", "Perez", "Hall", "Young", "Allen"
   ],
-  EMAIL: function() {
-    return getRandomData('@LETTER_LOWER') + '.' + getRandomData('@LAST_NAME').toLowerCase() + '@' + getRandomData('@LAST_NAME').toLowerCase() + '.com';
+  EMAIL: () => {
+    return getRandomData('@LETTER_LOWER') + '.' + getRandomData('@E_FIRST').toLowerCase() + '@' + getRandomData('@E_LAST').toLowerCase() + '.com';
   },
-  DATE: function() {
+  DATE: () => {
     return (new Date(Math.floor(Math.random() * new Date()))).getTime();
   },
-  LOREM: function() {
-    var words = 'lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum'.split(' ');
-    var index = Math.floor(Math.random() * words.length);
-    return words[index];
+  TAG: () => {
+    let tags = '赤 蓝 黄 绿 蓝 靛 紫 初级 高级 中级'.split(' ');
+    let index = Math.floor(Math.random() * tags.length / 2)
+    return tags[index];
   },
-  LOREM_IPSUM: function() {
-    var words = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum'.split(' ');
+  WORDS: () => {
+    let words = '早在Netscape诞生不久后，JavaScript就一直在探索本地编程的路，Rhino是其代表产物。'.split('');
     var result = [];
     var length = Math.floor(Math.random() * words.length / 2);
     for (var i = 0; i < length; i++) {
       var index = Math.floor(Math.random() * words.length);
       result.push(words[index]);
     }
-    return result.join(' ');
+    return result.join('');
+  },
+  C_FIRST: ['王', '李', '张', '刘', '陈', '杨', '赵', '黄', '周', '吴', '徐', '孙', '胡', '朱', '高', '林', '何', '郭', '马', '罗', '梁', '宋', '郑', '谢', '韩', '唐', '冯', '于', '董', '萧', '程', '曹', '袁', '邓', '许', '傅', '沈', '曾', '彭', '吕', '苏', '卢', '蒋', '蔡', '贾', '丁', '魏', '薛', '叶', '阎', '余', '潘', '杜', '戴', '夏', '锺', '汪', '田', '任', '姜', '范', '方', '石', '姚', '谭', '廖', '邹', '熊', '金', '陆', '郝', '孔', '白', '崔', '康', '毛', '邱', '秦', '江', '史', '顾', '侯', '邵', '孟', '龙', '万', '段', '雷', '钱', '汤', '尹', '黎', '易', '常', '武', '乔', '贺', '赖', '龚', '文'],
+  C_LAST: ['伟', '芳', '娜', '秀英', '敏', '静', '丽', '强', '磊', '军', '洋', '勇', '艳', '杰', '娟', '涛', '明', '超', '秀兰', '霞', '平', '刚', '桂英', '帅'],
+  NAME: () => {
+    return getRandomData('@C_FIRST') + getRandomData('@C_LAST');
+  },
+  PHONE: () => {
+    let phl = ['13', '15', '18', '17'],
+      phr = '';
+    let i = Math.round(Math.random() * 4)
+    for (j = 0; j < 9; j++) {
+      phr += Math.round(Math.random() * 9)
+    }
+    return phl[i] + phr
   }
 };
 

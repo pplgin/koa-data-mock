@@ -33,6 +33,15 @@
             <a href="/mocklist/"><i class="glyphicon glyphicon-th-list"></i> mock 列表</a>
           </li>
         </ul>
+        <form class="navbar-form navbar-left">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Search">
+          </div>
+          <button type="button" class="btn btn-default">搜索</button>
+        </form>
+        <ul class="nav navbar-nav navbar-right hidden-sm">
+          <li><a href="/help/"><i class="glyphicon glyphicon-question-sign"></i> 使用说明</a></li>
+        </ul>
       </div>
     </div>
   </nav>

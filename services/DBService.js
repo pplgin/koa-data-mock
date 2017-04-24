@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/mockdb');
+mongoose.connect('mongodb://45.78.21.205/mockdb');
 
 // 基本数据模型
 const Mocklist = require('../model/MockList');
@@ -44,11 +44,9 @@ const DBService = (() => {
         })
       }
     },
-    user:{
-      login:()=>{
-      },
-      reg:()=>{
-      }
+    user: {
+      login: () => {},
+      reg: () => {}
     }
   }
 })();

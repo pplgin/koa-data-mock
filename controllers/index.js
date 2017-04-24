@@ -5,10 +5,12 @@
  * @createTime          2017-03-20T14:16:02+0800
  */
 const DBService = require('../services/DBService.js');
+const mockFun = require('../services/JsonMockService.js');
 module.exports = (() => {
   return {
     index: async(ctx, tmpl) => {
-      let json = {},_data = {}
+      let json = {},
+        _data = {}
       if (ctx.params.id) {
         let mockdata = DBService.mock.find(ctx.params.id);
         json = await mockdata
@@ -18,9 +20,9 @@ module.exports = (() => {
           'id': json[0].id || 0
         }
       }
-      await ctx.render(tmpl,_data);
+      await ctx.render(tmpl, _data);
     },
-    deleteMockById: async (ctx) => {
+    deleteMockById: async(ctx) => {
       let dataResult = DBService.mock.remove(ctx.params.id);
       let deleteRes = await dataResult;
       if (deleteRes.result.ok) {
@@ -34,7 +36,7 @@ module.exports = (() => {
         };
       }
     },
-    getMockById: async (ctx) => {
+    getMockById: async(ctx) => {
       let dataPro = DBService.mock.find(ctx.params.id);
       let mobj = await dataPro;
       mobj = mobj[0]
@@ -44,8 +46,9 @@ module.exports = (() => {
         ctx.body = '未找到';
       }
     },
-    postMock: async (ctx) => {
+    postMock: async(ctx) => {
       let _params = ctx.request.body;
+      console.log(eval('(' + _params.mokjson + ')'))
       let moc = mockFun(eval('(' + _params.mokjson + ')'));
       let _id = Math.random().toString(36).slice(2);
       let id = _params.id || _id;
@@ -69,6 +72,9 @@ module.exports = (() => {
         id: id,
         url: `http://0.0.0.0:3030/mock/${id}`
       };
+    },
+    help: async(ctx, tmpl) => {
+      await ctx.render(tmpl);
     }
   }
 })()

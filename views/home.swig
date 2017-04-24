@@ -17,17 +17,6 @@
       <textarea class="form-control mockdesc" placeholder="mock说明">{{mockdesc}}</textarea>
     </div>
     <div class="form-group">
-      <label>接口类型(tag)</label>
-      <div class="checkbox">
-        <label class="checkbox-inline">
-          <input type="checkbox" value="public">公用
-        </label>
-        <label class="checkbox-inline">
-          <input type="checkbox" value="private">私用
-        </label>
-      </div>
-    </div>
-    <div class="form-group">
       <label>模板结构 <a class="btn btn-info btn-xs" id="f1">format</a></label>
       <textarea class="form-control mockjson">{{mocktmpl}}</textarea>
     </div>
@@ -67,6 +56,5 @@
       id: '{{id}}'
     }
   </script>
-  <script src="/js/ajax.js"></script>
   <script src="/js/home.js"></script>
 {% endblock %}
