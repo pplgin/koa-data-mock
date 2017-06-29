@@ -1,9 +1,9 @@
-const mongoose = require('mongoose');
-mongoose.connect('mongodb://45.78.21.205/mockdb');
-
+// const mongoose = require('mongoose');
+// mongoose.connect('mongodb://45.78.21.205/mockdb');
+// mongoose.connect('mongodb://127.0.0.1:27017/mockdb')
 // 基本数据模型
 const Mocklist = require('../model/MockList');
-
+const Account = require('../model/Account');
 
 const DBService = (() => {
   return {
@@ -43,10 +43,6 @@ const DBService = (() => {
           id: _id
         })
       }
-    },
-    user: {
-      login: () => {},
-      reg: () => {}
     }
   }
 })();

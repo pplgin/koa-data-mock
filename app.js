@@ -1,10 +1,16 @@
 const Koa = require('koa');
+const session = require('koa-generic-session');
+const redisStore = require('koa-redis');
 const views = require('koa-views');
 const app = new Koa();
 const bodyParser = require('koa-bodyparser');
 const serve = require('koa-static');
 const DBService = require('./services/DBService.js');
 
+
+
+app.keys = ['keys', 'keykeys'];
+app.use(session());
 
 app.use(bodyParser())
 

@@ -30,4 +30,13 @@ module.exports = [{
   url: '/help',
   controller: 'index::help',
   template: 'help'
+},{
+  url: '/account',
+  controller: 'user::index',
+  template: 'account'
+},{
+  url: '/api/reg',
+  method: 'post',
+  controller: 'user::PostReg',
+  template: 'account'
 }];

@@ -7,7 +7,8 @@ const AccountSchema = mongoose.Schema({
   nick: String,
   pwd: String,
   createtime: Date,
-  updatetime: Date
+  updatetime: Date,
+  role: String
 });
 
 const Account = mongoose.model('user', AccountSchema);

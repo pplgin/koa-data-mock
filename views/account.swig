@@ -24,10 +24,10 @@
   </div>
   <div class="col-md-6">
     <h3 class="page-header">注册</h3>
-    <form method="POST" action="/api/reg">
+    <form action="/api/reg" method="Post" target="_self">
       <div class="form-group">
         <label>用户名</label>
-        <input type="text" name="username" class="form-control">
+        <input type="text" name="nick" class="form-control">
       </div>
       <div class="form-group">
         <label>密码</label>
@@ -35,9 +35,9 @@
       </div>
       <div class="form-group">
         <label>密码</label>
-        <input type="password" name="username" class="form-control">
+        <input type="password" name="pwd1" class="form-control">
       </div>
-      <input id="sendbtn" type="button" class="btn btn-primary" value="注册">
+      <input id="sendbtn" type="submit" class="btn btn-primary" value="注册">
     </form>
   </div>
 </div>
