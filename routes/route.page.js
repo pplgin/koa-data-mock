@@ -2,7 +2,7 @@
  * [exports 路由模板]
  * @type {Array}
  */
-module.exports = [{
+export default [{
   url: '/',
   controller: 'index',
   template: 'home'
@@ -26,17 +26,26 @@ module.exports = [{
   url: '/mocklist',
   controller: 'mocklist',
   template: 'mocklist'
-},{
+}, {
   url: '/help',
   controller: 'index::help',
   template: 'help'
-},{
-  url: '/account',
-  controller: 'user::index',
-  template: 'account'
-},{
-  url: '/api/reg',
+}, {
+  url: '/account/login',
+  controller: 'AccountController::login',
+  template: 'account/login'
+}, {
+  url: '/account/login',
+  controller: 'AccountController::postLogin',
   method: 'post',
-  controller: 'user::PostReg',
-  template: 'account'
+  template: 'account/login'
+}, {
+  url: '/account/register',
+  controller: 'AccountController::register',
+  template: 'account/register'
+}, {
+  url: '/account/register',
+  controller: 'AccountController::postRegister',
+  method: 'post',
+  template: 'account/register'
 }];

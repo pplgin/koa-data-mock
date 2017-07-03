@@ -8,7 +8,7 @@ const Account = require('../model/Account');
 const DBService = (() => {
   return {
     mock: {
-      list: () => {
+     list: async () => {
         return Mocklist.find().exec();
       },
       // 按照Id 查询内容

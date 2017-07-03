@@ -3,19 +3,17 @@ const session = require('koa-generic-session');
 const redisStore = require('koa-redis');
 const views = require('koa-views');
 const app = new Koa();
-const bodyParser = require('koa-bodyparser');
-const serve = require('koa-static');
-const DBService = require('./services/DBService.js');
+const bodyParser = require('koa-bodyparser')
+const serve = require('koa-static')
 
 
+const DBService = require('./services/DBService.js')
+const routeMap = require('./middlewares/routeMap')
+let routesConfig = require('./routes/index')
 
-app.keys = ['keys', 'keykeys'];
-app.use(session());
-
+app.keys = ['keys']
+app.use(session())
 app.use(bodyParser())
-
-// 加载路由配置
-const router = require('./middlewares/routeMid');
 
 // set template and template dir
 app.use(views(__dirname + '/views', {
@@ -26,17 +24,16 @@ app.use(views(__dirname + '/views', {
   extension: 'swig'
 }));
 
+app.use(routeMap(routesConfig))
+
 // static source dir
 app.use(serve(__dirname + '/static'))
 
 app.use(async(ctx, next) => {
-  let stime = new Date();
-  await next();
+  let stime = new Date()
+  await next()
   console.log(`link:${ctx.url} begin:${stime}`)
 })
-
-app.use(router.routes())
-  .use(router.allowedMethods())
 
 app.listen('3030', () => {
   console.log('server is running at http://0.0.0.0:3030')

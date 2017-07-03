@@ -1,14 +1,15 @@
 // 必须登录
-import WebConfig from '../config/web.config';
+import { WebConfig } from '../config/web.config';
 
 // 验证登录
 export const Authorize = (target, key, descriptor) => {
   return {
-    value: (ctx) => {
+    value: (ctx, tmpl) => {
       if (!ctx.session.uuid) {
-        return ctx.redirect(WebConfig.loginUrl)
+        return ctx.redirect(WebConfig.AUTHORIZE)
       }
-      return descriptor.value.call(target, scope, ctx);
+      ctx.state.session = ctx.session
+      return descriptor.value.call(target,ctx, tmpl);
     }
   }
 }

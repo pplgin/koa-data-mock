@@ -13,10 +13,28 @@ class AccountService extends BaseService {
     super();
   }
 
-  find() {}
+  async find(model) {
+    let member = await Account.findOne({
+      nick: model.nick,
+      pwd: md5(model.pwd)
+    }).exec()
+    if(!member){
+      throw new Error('用户名或密码错误！')
+    }
+    return member;
+  }
 
   async create(model) {
     let nowTime = (new Date).getTime();
+
+    let member = await Account.findOne({
+      nick: model.nick
+    }).exec()
+
+    if(member){
+      throw new Error('用户名已经存在！')
+    }
+
     let user = new Account({
       id: uuid(),
       nick: model.nick,
