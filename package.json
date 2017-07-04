@@ -6,7 +6,8 @@
   "scripts": {
     "db": "mongod --dbpath=./data/db --fork --logpath mongo.log",
     "dev": "nodemon --exec babel-node app.js",
-    "debug": "nodemon --inspect --exec babel-node app.js"
+    "debug": "nodemon --inspect --exec babel-node app.js",
+    "release": "pm2 start --interpreter babel-node app.js"
   },
   "keywords": [
     "koa",

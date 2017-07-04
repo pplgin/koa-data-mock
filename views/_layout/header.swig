@@ -28,8 +28,9 @@
         </form>
         <ul class="nav navbar-nav navbar-right hidden-sm">
           <li><a href="/help/"><i class="glyphicon glyphicon-question-sign"></i> 使用说明</a></li>
-          {% if session%}
-            <li><a href="/account/center/"><i class="glyphicon glyphicon glyphicon-user"></i>{{session.uuid}}</a></li>
+          {% if session.user %}
+            <li><a href="/account/center/"><i class="glyphicon glyphicon glyphicon-user"></i>{{session.user.nick}}</a></li>
+            <li><a href="/account/loginout">注销</a></li>
           {% else %}
             <li><a href="/account/login/"><i class="glyphicon glyphicon glyphicon-user"></i> 登录</a></li>
             <li><a href="/account/register/">注册</a></li>

@@ -46,7 +46,17 @@ class AccountService extends BaseService {
     let result = await user.save();
     return result;
   }
-  check() {}
+
+  async edit(model){
+    let nowTime = (new Date).getTime();
+    let result = await Account.update({id: model.id}, {
+      nick: model.nick,
+      pwd: md5(model.pwd),
+      role: model.role || '1',
+      updatetime: nowTime,
+    });
+    return result;
+  }
 }
 
 module.exports = new AccountService();

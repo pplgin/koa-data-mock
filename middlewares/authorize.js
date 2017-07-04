@@ -5,10 +5,9 @@ import { WebConfig } from '../config/web.config';
 export const Authorize = (target, key, descriptor) => {
   return {
     value: (ctx, tmpl) => {
-      if (!ctx.session.uuid) {
-        return ctx.redirect(WebConfig.AUTHORIZE)
+      if (!ctx.session.user) {
+        return ctx.redirect(`${WebConfig.AUTHORIZE}?url=${ctx.path}`)
       }
-      ctx.state.session = ctx.session
       return descriptor.value.call(target,ctx, tmpl);
     }
   }

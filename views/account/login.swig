@@ -14,6 +14,7 @@
     {% if errMsg %}
     <div class="alert alert-danger" role="alert">{{errMsg}}</div>
     {% endif %}
+    <input type="hidden" name="refUrl" value="{{refUrl}}">
     <div class="form-group">
       <label>用户名</label>
       <input type="text" name="nick" class="form-control">

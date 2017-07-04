@@ -6,14 +6,18 @@ const app = new Koa();
 const bodyParser = require('koa-bodyparser')
 const serve = require('koa-static')
 
-
-const DBService = require('./services/DBService.js')
 const routeMap = require('./middlewares/routeMap')
 let routesConfig = require('./routes/index')
 
 app.keys = ['keys']
 app.use(session())
 app.use(bodyParser())
+
+// koa-views default bind ctx.state
+app.use(async (ctx,next)=>{
+  ctx.state.session = ctx.session ? ctx.session : null;
+  await next();
+})
 
 // set template and template dir
 app.use(views(__dirname + '/views', {

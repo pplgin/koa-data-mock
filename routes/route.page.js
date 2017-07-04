@@ -24,7 +24,7 @@ export default [{
   template: 'home'
 }, {
   url: '/mocklist',
-  controller: 'mocklist',
+  controller: 'MockListController::Index',
   template: 'mocklist'
 }, {
   url: '/help',
@@ -39,6 +39,9 @@ export default [{
   controller: 'AccountController::postLogin',
   method: 'post',
   template: 'account/login'
+}, {
+  url: '/account/loginout',
+  controller: 'AccountController::loginOut',
 }, {
   url: '/account/register',
   controller: 'AccountController::register',

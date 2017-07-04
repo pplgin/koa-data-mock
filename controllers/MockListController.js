@@ -1,5 +1,5 @@
-import { Authorize } from '../middlewares/Authorize'
-const DBService = require('../services/DBService.js')
+import { Authorize } from '../middlewares/authorize.js'
+const MockService = require('../services/MockService.js')
 
 /**
  * mock 历史数据
@@ -9,8 +9,8 @@ const DBService = require('../services/DBService.js')
  */
 class MockList {
   @Authorize
-  async index(ctx, tmpl){
-    let listData = await DBService.mock.list();
+  async Index(ctx, tmpl){
+    let listData = await MockService.list();
     await ctx.render(tmpl,{ list: listData })
   }
 }

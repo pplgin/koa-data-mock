@@ -4,7 +4,7 @@
  * @email                                        johnnyjiang813@gmail.com
  * @createTime          2017-03-20T14:16:02+0800
  */
-const DBService = require('../services/DBService.js');
+const MockService = require('../services/MockService.js');
 const mockFun = require('../services/JsonMockService.js');
 module.exports = (() => {
   return {
@@ -12,7 +12,7 @@ module.exports = (() => {
       let json = {},
         _data = {}
       if (ctx.params.id) {
-        let mockdata = DBService.mock.find(ctx.params.id);
+        let mockdata = await MockService.find(ctx.params.id);
         json = await mockdata
         _data = {
           'mocktmpl': json[0].mocktmpl || {},
@@ -23,7 +23,7 @@ module.exports = (() => {
       await ctx.render(tmpl, _data);
     },
     deleteMockById: async(ctx) => {
-      let dataResult = DBService.mock.remove(ctx.params.id);
+      let dataResult = await MockService.remove(ctx.params.id);
       let deleteRes = await dataResult;
       if (deleteRes.result.ok) {
         ctx.body = {
@@ -37,7 +37,7 @@ module.exports = (() => {
       }
     },
     getMockById: async(ctx) => {
-      let dataPro = DBService.mock.find(ctx.params.id);
+      let dataPro = await MockService.find(ctx.params.id);
       let mobj = await dataPro;
       mobj = mobj[0]
       if (mobj.id) {
@@ -54,14 +54,14 @@ module.exports = (() => {
       let id = _params.id || _id;
       if (_params.id) {
         // 荣错处理 to do
-        DBService.mock.update(_params.id, {
+        await MockService.update(_params.id, {
           mockdesc: _params.mockdesc,
           mocktmpl: _params.mokjson,
           mockjson: moc
         })
       } else {
         // 荣错处理 to do
-        DBService.mock.save({
+        await MockService.save({
           id: _id,
           mockdesc: _params.mockdesc,
           mocktmpl: _params.mokjson,
